@@ -86,7 +86,7 @@
 					else
 						alert("valid date not set");
 				});
-				$(".attcheck").click(function(){
+				$(document).on("click",".attcheck",function(){
 					var $div=$(this).closest("div");
 					resp($div);
 				});
@@ -113,65 +113,64 @@
 			}
 		</script>
 		<script type="text/javascript">
-			var order='ID';
+			var sorterfn ={
+				by_id:function(a,b){
+					return parseInt($(a).find("#roll").text(),10) >
+						parseInt($(b).find("#roll").text(),10);
+				},
+				by_per:function(a,b){
+					return $(a).find("#present").text() >
+						$(b).find("#present").text();
+				},
+				by_name:function(a,b){
+					return $(a).find("#first_name").text()+$(a).find("#last_name").text() >
+						$(b).find("#first_name").text()+$(b).find("#last_name").text();
+				},
+				by_check:function(a,b){
+					return ($(a).find("#attendence").is(":checked")) >
+						($(b).find("#attendence").is(":checked"));
+				}
+			};
+			function sorter(comp_by){
+				var sort=[].sort();
+				var $StudentListContainer =$("div.student");
+				var OrderedDivs =$StudentListContainer.sort(comp_by);
+				$("#StudentListContainer").html(OrderedDivs);
+			};
+			function rev_sorter(comp_by){
+				var $StudentListContainer =$("div.student");
+				var OrderedDivs =$StudentListContainer.sort(function(a,b){
+					return !comp_by(a,b)
+				});
+				$("#StudentListContainer").html(OrderedDivs);
+			};
+			var order='DSC';
+
 			function reorderdiv(BY){
-				if(BY=='ID'&& order!='ID')
-					{
-						alert("reordering "+order+"=>"+BY);
-						order_id();
-						order=BY;
-					}
-				else if(BY =='PER'&& order!='PER')
-					{
-						alert("reordering "+order+"=>"+BY);
-						order_per();
-						order=BY;
-					}
-				else if(BY =='ALPH'&& order!='ALPH')
-					{
-						alert("reordering "+order+"=>"+BY);
-						order_alph();
-						order=BY;
-					}
-				
-				else if(BY =='CHECK'&& order!='CHECK')
+				if(BY==order)
+				{
+					alert("reordering "+order+"=>"+'DSC');
+					rev_sorter(sorterfn[BY]);
+					order='DSC';
+				}
+				else
 				{
 					alert("reordering "+order+"=>"+BY);
-						order_check();
-						order=BY;
+					sorter(sorterfn[BY]);
+					order=BY;
 				}
-				
 			};
-			function order_id(){
-				var $StudentListContainer =$("div.student");
-				var OrderedDivsById =$StudentListContainer.sort(function(a,b){
-					return parseInt($(a).find("#roll").text(),10)> parseInt($(b).find("#roll").text(),10);
-				});
-				$("#StudentList").html(OrderedDivsById);
-			};
-			function order_per(){
-				var $StudentListContainer =$("div.student");
-				var OrderedDivsByPer =$StudentListContainer.sort(function(a,b){
-					return $(a).find("#first_name").text()> $(b).find("#first_name").text();
-				});
-				$("#StudentList").html(OrderedDivsByPer);
-			};
-			function order_alph(){
-				var $StudentListContainer =$("div.student");
-				var OrderedDivsByPer =$StudentListContainer.sort(function(a,b){
-					return $(a).find("#first_name").text()+$(a).find("#last_name").text()> $(b).find("#first_name").text()+$(b).find("#last_name").text();
-				});
-				$("#StudentList").html(OrderedDivsByPer);
-			};	
-			
-			function order_check(){
-				var $StudentListContainer =$("div.student");
-				var OrderedDivsByPer =$StudentListContainer.sort(function(a,b){
-					return ($(a).find("#attendence").is(":checked")) > ($(b).find("#attendence").is(":checked"));
-				});
-				$("#StudentList").html(OrderedDivsByPer);
-			};	
 		</script>
+		<style >
+			#first_name: {
+				float: left;
+				width: 80px;
+			}
+			#last_name: {
+				float: left;
+				width: 80px;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -201,17 +200,14 @@
 			<option value="e3">Evening 3 O'clock</option>
 			<option value="e4">Evening 4 O'clock</option>
 		</select><br/><br/>
-		<input type="button" id="byid" name="byid" value="byid" onclick="reorderdiv('ID')">
-		<input type="button" id="byper" name="byper" value="byper" onclick="reorderdiv('PER')">
-		<input type="button" id="byalph" name="byalph" value="byalph" onclick="reorderdiv('ALPH')">
-		<input type="button" id="bycheck" name="bycheck" value="bycheck" onclick="reorderdiv('CHECK')">
+		<input type="button" id="byid" name="byid" value="byid" onclick="reorderdiv('by_id')">
+		<input type="button" id="byper" name="byper" value="byper" onclick="reorderdiv('by_per')">
+		<input type="button" id="byalph" name="byalph" value="byalph" onclick="reorderdiv('by_name')">
+		<input type="button" id="bycheck" name="bycheck" value="bycheck" onclick="reorderdiv('by_check')">
 		<br/>
 		<a>Student List</a>
-		<form  id="StudentList">
-		<!--================================================-->
-			
-		</form>
-		<!--================================================-->
+		<div  id="StudentList">			
+		</div>
 
 		<br/>
 		<br/> <h4>made by shivam</h4>
