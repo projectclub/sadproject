@@ -15,6 +15,20 @@
 	{
 		echo "Successfully loged in as " ;
 		echo $account_type;
+		$attributes='usr_id='.$usr_id;
+		if($account_type=='teacher')
+		{
+			header("location:thome.php?".$attributes);
+		}
+		elseif ($account_type=='student')
+		{
+			header("location:shome.php?".$attributes);
+		}
+		else
+		{
+			echo "ERROR OCCURED IN THE DATABASE";
+			echo "PLEASE CONTACT THE DEVELOPER";
+		}
 	}
 	else
 		echo "\nUser id and password does not macth any account";

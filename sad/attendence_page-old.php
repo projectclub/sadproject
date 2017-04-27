@@ -140,7 +140,6 @@
 						order_check();
 						order=BY;
 				}
-				
 			};
 			function order_id(){
 				var $StudentListContainer =$("div.student");

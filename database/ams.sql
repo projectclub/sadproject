@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2017 at 01:42 PM
+-- Generation Time: Apr 26, 2017 at 12:40 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `ams`
 --
+CREATE DATABASE IF NOT EXISTS `ams` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `ams`;
 
 -- --------------------------------------------------------
 
@@ -27,9 +29,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `attendence_table` (
-  `id` int(11) NOT NULL,
+  `id` int(11) DEFAULT NULL,
   `roll` int(11) NOT NULL,
-  `date` int(11) NOT NULL,
+  `date` date NOT NULL,
   `course_id` int(11) NOT NULL,
   `teacher_id` int(11) NOT NULL,
   `periodcode` enum('m9','m10','m11','m12','e1','e2','e3') NOT NULL,
@@ -50,8 +52,30 @@ CREATE TABLE `course` (
   `department` enum('comp','etc','it','mech','mining','ene','civil') NOT NULL,
   `year` year(4) NOT NULL,
   `sem` enum('1','2','3','4','5','6','7','8') NOT NULL,
-  `lab` tinyint(1) NOT NULL
+  `lab` tinyint(1) NOT NULL,
+  `teacher_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`id`, `name`, `department`, `year`, `sem`, `lab`, `teacher_id`) VALUES
+(101, 'oopd', 'comp', 2017, '4', 1, 111),
+(102, 'maths', 'comp', 2017, '4', 0, 112),
+(103, 'em', 'comp', 2017, '4', 0, 111);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `login`
+-- (See below for the actual view)
+--
+CREATE TABLE `login` (
+`id` int(11)
+,`pass` varchar(40)
+,`account_type` varchar(7)
+);
 
 -- --------------------------------------------------------
 
@@ -72,6 +96,21 @@ CREATE TABLE `student` (
   `batch` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`roll`, `first_name`, `last_name`, `sem`, `dob`, `gender`, `batch_of`, `email`, `phone`, `batch`) VALUES
+(111051, 'shivam', 'kurtarkar', '4', '1997-04-24', 'Male', 2015, 'asf@gmail.com', 123456789, 'b'),
+(111052, 'Anoop', 'Kinlekar', '4', '2017-04-27', 'Male', 2015, NULL, NULL, 'a'),
+(111053, 'Anand', 'kandalekar', '4', '2017-04-08', 'Male', 2015, NULL, NULL, 'b'),
+(111054, 'rushikesh', 'prabhudessai', '4', '2017-03-02', 'Male', 2015, NULL, NULL, 'd'),
+(111055, 'raksha', 'maushi', '4', '2017-04-05', 'Female', 2015, NULL, NULL, 'd'),
+(111056, 'nikita', 'salkar', '4', '2017-04-02', 'Female', 2015, NULL, NULL, 'c'),
+(111057, 'rajiv', 'puranik', '4', '2016-04-09', 'Male', 2015, NULL, NULL, 'd'),
+(111058, 'shivani', 'kulkarni', '4', '2016-04-01', 'Female', 2015, NULL, NULL, 'a'),
+(111059, 'shivani', 'nadkarni', '4', '2017-04-05', 'Female', 2015, NULL, NULL, 'c');
+
 -- --------------------------------------------------------
 
 --
@@ -80,7 +119,7 @@ CREATE TABLE `student` (
 
 CREATE TABLE `teacher` (
   `id` int(11) NOT NULL,
-  `name` int(60) NOT NULL,
+  `first_name` varchar(40) NOT NULL,
   `last_name` varchar(40) NOT NULL,
   `dob` date NOT NULL,
   `gender` enum('Male','Female') NOT NULL,
@@ -88,6 +127,14 @@ CREATE TABLE `teacher` (
   `phone` int(10) DEFAULT NULL,
   `department` enum('comp','etc','it','mining','ene','mech','civil') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `teacher`
+--
+
+INSERT INTO `teacher` (`id`, `first_name`, `last_name`, `dob`, `gender`, `email`, `phone`, `department`) VALUES
+(111, 'kavita', 'patel', '2017-04-10', 'Female', NULL, NULL, 'comp'),
+(112, 'amit', 'jain', '2017-04-30', 'Male', NULL, NULL, 'comp');
 
 -- --------------------------------------------------------
 
@@ -100,8 +147,16 @@ CREATE TABLE `teacher_course` (
   `course_id` int(11) NOT NULL,
   `year` year(4) NOT NULL,
   `sem` enum('1','2','3','4','5','6','7','8') NOT NULL,
-  `batch` varchar(9) NOT NULL
+  `batch` set('a','b','c','d') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `teacher_course`
+--
+
+INSERT INTO `teacher_course` (`teacher_id`, `course_id`, `year`, `sem`, `batch`) VALUES
+(111, 103, 2017, '4', 'a,b,c,d'),
+(112, 102, 2017, '4', 'a,b,c,d');
 
 -- --------------------------------------------------------
 
@@ -120,6 +175,24 @@ CREATE TABLE `timetable` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `timetable`
+--
+
+INSERT INTO `timetable` (`course_id`, `teacher_id`, `periodcode`, `year`, `sem`, `day`, `department`) VALUES
+(102, 112, 'm9', 2017, '4', 'mon', 'comp'),
+(103, 111, 'm10', 2017, '4', 'mon', 'comp'),
+(103, 111, 'm11', 2017, '4', 'mon', 'comp');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `login`
+--
+DROP TABLE IF EXISTS `login`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `login`  AS  select `student`.`roll` AS `id`,`student`.`first_name` AS `pass`,'student' AS `account_type` from `student` union select `teacher`.`id` AS `id`,`teacher`.`first_name` AS `pass`,'teacher' AS `account_type` from `teacher` ;
+
+--
 -- Indexes for dumped tables
 --
 
@@ -127,7 +200,7 @@ CREATE TABLE `timetable` (
 -- Indexes for table `attendence_table`
 --
 ALTER TABLE `attendence_table`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`roll`,`date`,`periodcode`);
 
 --
 -- Indexes for table `course`
@@ -152,6 +225,12 @@ ALTER TABLE `teacher`
 --
 ALTER TABLE `teacher_course`
   ADD PRIMARY KEY (`teacher_id`,`course_id`);
+
+--
+-- Indexes for table `timetable`
+--
+ALTER TABLE `timetable`
+  ADD PRIMARY KEY (`periodcode`,`year`,`day`,`department`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
