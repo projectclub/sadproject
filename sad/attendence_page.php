@@ -13,7 +13,7 @@
 <html lang="en">
 	<head>
 		<script src="http://localhost/jquery/jquery-3.2.1.min.js"></script>
-		
+		<style type="text/css" src="style.css"></style>
 		<script type="text/javascript" id="responsive" >
 			var resp = function (div){ ;}
 			function savestudent(div){
