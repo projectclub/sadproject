@@ -1,21 +1,97 @@
+<!DOCTYPE html>
 <html>
-	<head>
-		<style type="text/css" src="style.css">
-		</style>
-	</head>
+	<title>AMS</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+      <meta charset="UTF-8">
+      <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+      <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style>
+        html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+      </style>
+	<style>
+		body{
+
+		}
+		header {
+	        height: 70px;
+		    width: 100%;
+			top: 0;
+		    left: 0;
+		    right: 0;
+		    bottom: 100px;
+		    color: grey;
+			text-align: center;
+			position: absolute;
+		}
+	    #main-wrapper{
+	    	top:100px;
+	        min-height: 100%;
+		    padding: 0 0 100px;
+		    position: relative;
+	    }
+		.center {
+		    margin: auto;
+		    width: 40%;
+
+		    padding: 10px;
+		    align-items: center;
+		}
+		.btn{
+			color: green;
+			height:40px;
+		}
+		footer {
+	        height: 50px;
+			width: 100%;
+			left: 0;
+	        right: 0;
+			bottom: 0;
+			text-align: center;
+		    position: absolute;
+		}
+		
+
+	</style>
 	<body>
-	<div id="hd1">
-		<h2>Attendence Management System</h2><br/>
+	<!-- Navigation bar-->
+		<header id="hd1" class="section-text">
+			<h2>Attendence Management System</h2><br/>
+		</header>
+		<!-- Main content -->
+		<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px;">    
+
+			<div class="w3-container center" ">
+				<div class="w3-card-4 w3-round-large w3-border" style="width: 500px;">
+					<div class="w3-container w3-theme-d4 " style="border-radius: 8px 8px 0 0">
+						<h2 style="text-align: center;">Login</h2>
+					</div>
+
+					<form action="loginauth.php" method="post" enctype="text" class="w3-container">
+					<br/>
+						<p>
+							<label> ID / Roll no: </label>
+							<input type="text"  " name="usr_id" value="112" style="margin-left:37px"><br/><br/>
+						
+							<label>Password:</label>
+							<input type="text"   name="pass" value="amit" style="margin-left:48px"><br/>
+						
+							&emsp;<button type="send" class="w3-btn w3-right btn w3-hover-green" name="Login" value="Login"> Login</button>
+						</p>
+						<br/>
+					</form>
+				</div>
+			</div>
 		</div>
-		<form action="loginauth.php" method="post" enctype="text">
-			<fieldset id="field1">
-				<legend>Login</legend>
-				<br/>
-				<input type="text" name="usr_id" value="112" t="User Id/ Roll no"><br/>
-				<input type="text" name="pass" value="amit" t="Password"><br/>
-				&emsp;<input type="Submit" name="Login" value="Login">
-			</fieldset>
-		</form>
+		<footer class="w3-container ">
+	      	<p>
+				<a>by shivam</a>
+			</p>	
+	    </footer>
 	</body>
 </html>
+
+
+
