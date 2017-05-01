@@ -66,48 +66,61 @@
 
 	<body>
 		<!--Nav bar-->
-	    <div class="w3-top w3-card-4">
-	       <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-	        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-	        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Assignment Management System</a>
-	        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-	        <?php echo $teacher_name[0]." ".$teacher_name[1];?>
-	        &nbsp&nbsp<img  src="http://localhost/w3/w3images/avatar<?php echo get_gender($teacher_id)=="Male"? 3:4 ?>.png" class="w3-circle" style="height:25px;width:25px" alt="Avatar"></a>
-	       </div>
-	    </div>
+		    <div class="w3-top w3-card-4" style="height:200px; ">
+		       	<div class="w3-bar w3-theme-d2 w3-left-align w3-large" style="height:100%; z-index: -1; position:relative;overflow:visible;">
+			       	<a class=" w3-bar-item w3-left  w3-theme-d2" >
+					  <b class="w3-opacity" style="font-size: 50px;">Attendence Management System</b>
+					</a>
+			        <br/><br/>
+			        <div class="w3-dropdown-hover w3-bar-item w3-right" >
+					    <a href="http://localhost/sad-proj/sad_v4/login.html" class=" w3-btn w3-hide-small w3-padding-large w3-hover-white" title="My Account">
+				        <?php echo $teacher_name[0]." ".$teacher_name[1];?>&nbsp&nbsp
+					        <img src="http://localhost/w3/w3images/avatar<?php echo get_gender($teacher_id)=="Male"? 3:4; ?>.png" class="w3-circle" style="height:80px;width:80px" alt="Avatar">
+					    </a>
+					    <div class="w3-dropdown-content w3-bar-block w3-card-4 "  >
+					    	<a href="http://localhost/sad-proj/sad_v4/login.html"  class="w3-bar-item w3-button">Home</a>
+					      <a href="http://localhost/sad-proj/sad_v4/login.html" class="w3-bar-item w3-button">Log out</a>
+					    </div>
+					</div>
+			        
+		       	</div>
+		    </div>
 	    <!--Nav bar end-->
 	    <!--main page-->
-	    <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
-      <!-- The Grid -->
-      		 <div class="w3-card-4 w3-padding w3-border">
-				<h3>Courses</h3>
-			</div>
-		<ul id="courselist" class="w3-ul">
-<?php
-	
-		
-	$query ="SELECT * FROM `course` WHERE teacher_id='$teacher_id';";
-	$result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_all($result);
-    printf("<br/>");
-    foreach ($row as  $value) {
-    	# code...
-    	?>
-    	<li  class='student w3-padding-16' onclick='fun(this)' > 
-    		&nbsp &nbsp <span id='course_id'><?php echo$value[0]?> </span>
-    		&nbsp <span id='course_name'><?php echo$value[1]?></span> 
-    		&nbsp <span id='course_year'><?php echo$value[3]?></span>
-    		&nbsp sem:&nbsp<span id='sem'><?php echo$value[4]?></span>
-    		<br/>
-    	</li>
-		
-    	
+	    <div class="w3-container  " style="max-width:800px;margin-top:80px; ">  
+		    <div class="w3-container " style="padding-left: 0;padding-right: 0; z-index: +1; position:relative;background-color: white;">    
+	      <!-- The Grid -->
+	      		 <div class="w3-card-4 w3-padding-64 w3-border " style="padding-left: 30px;">
+					<h2 class="w3-jumbo">Courses</h2>
+				</div>
+			<ul id="courselist " class="w3-ul " >
 	<?php
-    } ?>
-    <li></li>
-		</ul>
+		
+			
+		$query ="SELECT * FROM `course` WHERE teacher_id='$teacher_id';";
+		$result = mysqli_query($conn, $query);
+	    $row = mysqli_fetch_all($result);
+	    printf("<br/>");
+	    foreach ($row as  $value) {
+	    	# code...
+	    	?>
+	    	<li  class='student w3-padding-16 w3-btn' style="width:100%; text-align: left;" onclick='fun(this)' > 
+	    		&nbsp &nbsp <span id='course_id'><?php echo$value[0]?> </span>
+	    		&nbsp <span id='course_name'><?php echo$value[1]?></span> 
+	    		&nbsp <span id='course_year'><?php echo$value[3]?></span>
+	    		&nbsp sem:&nbsp<span id='sem'><?php echo$value[4]?></span>
+	    		<br/>
+	    	</li>
+			
+	    	
+		<?php
+	    } ?>
+	    	<li></li>
+			</ul>
+			</div>
 		</div>
-		<footer class="w3-container w3-theme-d5 w3-bottom">
+		<br/>
+		<footer class="w3-container w3-theme-d5 ">
 			<p>
 				<a>by shivam</a>
 			</p>

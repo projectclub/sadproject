@@ -9,7 +9,19 @@
       <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <style>
-        html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+	        html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+	        input:hover{
+		         outline: none;
+		         border-color: green;
+		    }
+	        
+	        /*
+	        box-shadow:0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);}
+			input:focus{  
+			    outline: none;
+			    border-color: green;
+			}
+			*/
       </style>
 	<style>
 		body{
@@ -55,43 +67,142 @@
 		
 
 	</style>
+	<style type="text/css">
+		
+		/* form starting stylings ------------------------------- */
+		.group 			  { 
+		  position:relative; 
+		  margin-bottom:45px; 
+		}
+		input 				{
+		  font-size:18px;
+		  padding:10px 10px 10px 5px;
+		  display:block;
+		  width:300px;
+		  border:none;
+		  border-bottom:1px solid #757575;
+		}
+		input:focus 		{ outline:none; }
+
+		/* LABEL ======================================= */
+		label 				 {
+		  color:#999; 
+		  font-size:18px;
+		  font-weight:normal;
+		  position:absolute;
+		  pointer-events:none;
+		  left:5px;
+		  top:10px;
+		  transition:0.2s ease all; 
+		  -moz-transition:0.2s ease all; 
+		  -webkit-transition:0.2s ease all;
+		}
+
+		/* active state */
+		input:focus ~ label, input:valid ~ label 		{
+		  top:-20px;
+		  font-size:14px;
+		  color:#5264AE;
+		}
+
+		/* BOTTOM BARS ================================= */
+		.bar 	{ position:relative; display:block; width:300px; }
+		.bar:before, .bar:after 	{
+		  content:'';
+		  height:2px; 
+		  width:0;
+		  bottom:1px; 
+		  position:absolute;
+		  background:#5264AE; 
+		  transition:0.2s ease all; 
+		  -moz-transition:0.2s ease all; 
+		  -webkit-transition:0.2s ease all;
+		}
+		.bar:before {
+		  left:50%;
+		}
+		.bar:after {
+		  right:50%; 
+		}
+
+		/* active state */
+		input:focus ~ .bar:before, input:focus ~ .bar:after {
+		  width:50%;
+		}
+
+
+
+		/* active state */
+		input:focus ~ .highlight {
+		  -webkit-animation:inputHighlighter 0.3s ease;
+		  -moz-animation:inputHighlighter 0.3s ease;
+		  animation:inputHighlighter 0.3s ease;
+		}
+
+		/* ANIMATIONS ================ */
+		@-webkit-keyframes inputHighlighter {
+			from { background:#5264AE; }
+		  to 	{ width:0; background:transparent; }
+		}
+		@-moz-keyframes inputHighlighter {
+			from { background:#5264AE; }
+		  to 	{ width:0; background:transparent; }
+		}
+		@keyframes inputHighlighter {
+			from { background:#5264AE; }
+		  to 	{ width:0; background:transparent; }
+		}
+	</style>
+
 	<body>
 	<!-- Navigation bar-->
-		<header id="hd1" class="section-text">
-			<h2>Attendence Management System</h2><br/>
-		</header>
+			<div class="w3-top w3-card-4" style="height:200px; ">
+		       <div class="w3-bar w3-theme-d2 w3-left-align w3-large" style="height:100%; z-index: -1; position:relative;">
+		       <a class=" w3-bar-item w3-left  w3-theme-d2" >
+				  <b class="w3-opacity" style="font-size: 50px;">Attendence Management System</b>
+				</a>
+		       </div>
+		    </div>
 		<!-- Main content -->
-		<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px;">    
+		<div class="w3-container w3-content" style="max-width:1400px;margin-top:100px;hover:border">    
 
-			<div class="w3-container center" ">
-				<div class="w3-card-4 w3-round-large w3-border" style="width: 500px;">
-					<div class="w3-container w3-theme-d4 " style="border-radius: 8px 8px 0 0">
-						<h2 style="text-align: center;">Login</h2>
+			<div class="w3-container center" >
+				<div class="w3-card-4  w3-border w3-cell-row" style="width: 500px; z-index: +1; position:relative;background-color: white;" >
+					<div class="w3-theme-d5  w3-cell">
+						<h2 class="w3-padding w3-opacity">Login</h2><br/>
 					</div>
+					<div class="w3-container w3-cell">
+					<form action="loginauth.php" method="post" enctype="text" >
+						   <br/><br/>
+							<div class="group">      
+						      <input type="text" name="usr_id" required>
+						      <span class="highlight"></span>
+						      <span class="bar"></span>
+						      <label>User Id</label>
+						    </div>
+						    <div class="group">      
+						      <input type="text" name="pass" required>
+						      <span class="highlight"></span>
+						      <span class="bar"></span>
+						      <label>Password</label>
+						    </div>
 
-					<form action="loginauth.php" method="post" enctype="text" class="w3-container">
-					<br/>
-						<p>
-							<label> ID / Roll no: </label>
-							<input type="text"  " name="usr_id" value="112" style="margin-left:37px"><br/><br/>
-						
-							<label>Password:</label>
-							<input type="text"   name="pass" value="amit" style="margin-left:48px"><br/>
-						
-							&emsp;<button type="send" class="w3-btn w3-right btn w3-hover-green" name="Login" value="Login"> Login</button>
-						</p>
+						    <p>
+								&emsp;<button type="send" class="w3-btn w3-right w3-ripple btn w3-hover-green" name="Login" value="Login"> Login</button>
+							</p>
 						<br/>
 					</form>
+					</div>
 				</div>
 			</div>
 		</div>
-		<footer class="w3-container ">
-	      	<p>
+		<br/>
+		<footer class="w3-container w3-theme-d5 ">
+			<p>
 				<a>by shivam</a>
-			</p>	
-	    </footer>
+			</p>
+		</footer>
 	</body>
 </html>
-
 
 

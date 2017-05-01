@@ -11,6 +11,12 @@
   	 $query ="SELECT `first_name`,`last_name` FROM `teacher` WHERE id='$teacher_id';";
   	$result = mysqli_query($conn, $query);
   	$teacher_name=mysqli_fetch_row($result);
+  	function get_gender($roll){
+			$str="SELECT gender  FROM `teacher` WHERE 
+			id=".$GLOBALS['teacher_id'].";";
+			$val= mysqli_fetch_row(mysqli_query($GLOBALS['conn'], $str))[0];
+			return $val;
+		}
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -252,19 +258,22 @@
 
 	<body>
 		<!--Nav bar-->
-		    <div class="w3-top w3-card-4">
-		       <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-		        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-		        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Assignment Management System</a>
-		        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-		        <?php echo $teacher_name[0]." ".$teacher_name[1];?>
-		        &nbsp&nbsp<img src="http://localhost/w3/w3images/avatar3.png" class="w3-circle" style="height:25px;width:25px" alt="Avatar"></a>
+	    <div class="w3-top w3-card-4" style="height:200px; ">
+	       <div class="w3-bar w3-theme-d2 w3-left-align w3-large" style="height:100%; z-index: -1; position:relative;">
+	       <a class=" w3-bar-item w3-left  w3-theme-d2" >
+			  <b class="w3-opacity" style="font-size: 50px;">Attendence Management System</b>
+			</a>
+	        <br/><br/>
+	        
+	        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+	        <?php echo $teacher_name[0]." ".$teacher_name[1];?>
+		        &nbsp&nbsp<img src="http://localhost/w3/w3images/avatar<?php echo get_gender($teacher_id)=="Male"? 3:4; ?>.png" class="w3-circle" style="height:80px;width:80px" alt="Avatar"></a>
 		       </div>
 		    </div>
 	    <!--Nav bar end-->
 	    	    <!--main page-->
-	    <div class="w3-container  " style="max-width:1400px;margin-top:80px; ">    
-			<div class="w3-panel  w3-theme-d2 w3-card-4">
+	    <div class="w3-container  " style="max-width:800px;margin-top:80px; ">    
+			<div class="w3-panel  w3-theme-d2 w3-card-4" style="z-index: +1; position:relative;background-color: white;">
 				<h3>Class :
 				<?php echo $course_id ." ".$course_name ." ". $course_year ." sem: ".$sem;	?>	
 				</h3>
@@ -295,7 +304,7 @@
 			
 
 
-			<div class="w3-card-4 w3-padding w3-border">
+			<div class="w3-card-4 w3-padding w3-border" style="z-index: +1; position:relative;background-color: white;"">
 				<a>Student List</a>
 				
 				<ul class="w3-ul ">
