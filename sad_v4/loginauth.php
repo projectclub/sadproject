@@ -24,6 +24,10 @@
 		{
 			header("location:shome.php?".$attributes);
 		}
+		elseif ($account_type=='admin')
+		{
+			header("location:../sadproject/student_entry.php?".$attributes);
+		}
 		else
 		{
 			echo "ERROR OCCURED IN THE DATABASE";

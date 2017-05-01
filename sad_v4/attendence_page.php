@@ -261,7 +261,7 @@
 	    <div class="w3-top w3-card-4" style="height:200px; ">
 	       <div class="w3-bar w3-theme-d2 w3-left-align w3-large" style="height:100%; z-index: -1; position:relative;">
 	       <a class=" w3-bar-item w3-left  w3-theme-d2" >
-			  <b class="w3-opacity" style="font-size: 50px;">Attendence Management System</b>
+			  <b class="w3-opacity" style="font-size: 50px;">Attendance Management System</b>
 			</a>
 	        <br/><br/>
 	        

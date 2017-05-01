@@ -20,12 +20,6 @@ session_start();
            if($username== $dbusername && $password== $dbpassword){
           $_SESSION['username']=$username;
           $_SESSION['id']=$userId;
-          <html>
-          <head></head>
-          <body>
-          <form action="process.php" method="POST">
-          </body>
-          </html>
           
         }else{
             echo "<span style='color:red;'>User name or password is incorrect!</span>";
