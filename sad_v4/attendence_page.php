@@ -24,10 +24,10 @@
 		<title>AMS</title>
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-	    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <link rel="stylesheet" href="../w3/w3css/4/w3.css">
+      <link rel="stylesheet" href="../css/w3-theme-blue-grey.css">
+      <link rel='stylesheet' href='../css/opensan.css'>
+      <link rel="stylesheet" href="../css/font-awesome.min.css">
 	    <style>
 	    html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	    </style>
@@ -55,7 +55,7 @@
 		<script src="../calender/codebase/dhtmlxcalendar.js"></script>
 		
 
-		<script src="http://localhost/jquery/jquery-3.2.1.min.js"></script>
+		<script src="../jquery/jquery-3.2.1.min.js"></script>
 		<style type="text/css" src="style.css"></style>
 		<script type="text/javascript" id="responsive" >
 			var resp = function (div){ ;}
@@ -265,16 +265,21 @@
 		<!--Nav bar-->
 	    <div class="w3-top w3-card-4" style="height:200px; ">
 	       <div class="w3-bar w3-theme-d2 w3-left-align w3-large" style="height:100%; z-index: -1; position:relative;">
-	       <a class=" w3-bar-item w3-left  w3-theme-d2" >
-			  <b class="w3-opacity" style="font-size: 50px;">Attendance Management System</b>
-			</a>
-	        <br/><br/>
-	        
-	        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-	        <?php echo $teacher_name[0]." ".$teacher_name[1];?>
-		        &nbsp&nbsp<img src="http://localhost/w3/w3images/avatar<?php echo get_gender($teacher_id)=="Male"? 3:4; ?>.png" class="w3-circle" style="height:80px;width:80px" alt="Avatar"></a>
-		       </div>
+		       <a class=" w3-bar-item w3-left  w3-theme-d2" >
+				  <b class="w3-opacity" style="font-size: 50px;">Attendance Management System</b>
+				</a>
+		        <br/><br/>
+		        <div class="w3-dropdown-hover w3-bar-item w3-right" >
+			        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+			        <?php echo $teacher_name[0]." ".$teacher_name[1];?>
+				        &nbsp&nbsp<img src="../w3/w3images/avatar<?php echo get_gender($teacher_id)=="Male"? 3:4; ?>.png" class="w3-circle" style="height:80px;width:80px" alt="Avatar"></a>
+			        <div class="w3-dropdown-content w3-bar-block w3-card-4 "  >
+					   	<a href="login.html"  class="w3-bar-item w3-button">Home</a>
+					      <a href="login.html" class="w3-bar-item w3-button">Log out</a>
+					</div>
+				</div>
 		    </div>
+		</div>
 	    <!--Nav bar end-->
 	    	    <!--main page-->
 	    <div class="w3-container  " style="max-width:800px;margin-top:80px; ">    

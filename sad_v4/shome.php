@@ -24,10 +24,10 @@
 		<title>AMS</title>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-      <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-      <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="../w3/w3css/4/w3.css">
+      <link rel="stylesheet" href="../css/w3-theme-blue-grey.css">
+      <link rel='stylesheet' href='../css/opensan.css'>
+      <link rel="stylesheet" href="../css/font-awesome.min.css">
       <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       </style>
@@ -88,13 +88,13 @@
 					</a>
 			        <br/><br/>
 			        <div class="w3-dropdown-hover w3-bar-item w3-right" >
-					    <a href="http://localhost/sad-proj/sad_v4/login.html" class=" w3-btn w3-hide-small w3-padding-large w3-hover-white" title="My Account">
+					    <a href="login.html" class=" w3-btn w3-hide-small w3-padding-large w3-hover-white" title="My Account">
 				        <?php echo $name[0]." ".$name[1];?>&nbsp&nbsp
-					        <img src="http://localhost/w3/w3images/avatar<?php echo get_gender($student_id)=="Male"? 2:5; ?>.png" class="w3-circle" style="height:80px;width:80px" alt="Avatar">
+					        <img src="../w3/w3images/avatar<?php echo get_gender($student_id)=="Male"? 2:5; ?>.png" class="w3-circle" style="height:80px;width:80px" alt="Avatar">
 					    </a>
 					    <div class="w3-dropdown-content w3-bar-block w3-card-4 "  >
-					    	<a href="http://localhost/sad-proj/sad_v4/login.html"  class="w3-bar-item w3-button">Home</a>
-					      <a href="http://localhost/sad-proj/sad_v4/login.html" class="w3-bar-item w3-button">Log out</a>
+					    	<a href="login.html"  class="w3-bar-item w3-button">Home</a>
+					      <a href="login.html" class="w3-bar-item w3-button">Log out</a>
 					    </div>
 					</div>
 			        

@@ -95,7 +95,7 @@
 			    ?>
 			    	<li class='student w3-padding-16' id="ll"> 
 			    	<span id="present_btn"  <?php echo get_attendence($value[0]) ?></span>
-				    <img src="http://localhost/w3/w3images/avatar<?php echo get_gender($value[0])=='Male'? 2:6; ?>.png" class="w3-left w3-circle w3-margin-right" style="width:50px"> 
+				    <img src="../w3/w3images/avatar<?php echo get_gender($value[0])=='Male'? 2:6; ?>.png" class="w3-left w3-circle w3-margin-right" style="width:50px"> 
 				    	&nbsp <span id='roll'><?php echo $value[0]?></span>
 				    	<br/>
 			    		
