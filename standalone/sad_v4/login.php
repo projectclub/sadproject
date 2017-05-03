@@ -1,4 +1,27 @@
+<?php
+	session_start();
+	if(isset($_SESSION['logedout']) && $_SESSION['logedout']) {
+		// remove all session variables
+	session_unset();
+		$GLOBALS['login_message']="<h4 style='color:red;'>Please Login!</h4>";
+	}
+	else if(isset($_SESSION['logedout_success']) && $_SESSION['logedout_success']) {
+		// remove all session variables
+	session_unset();
+		$GLOBALS['login_message']="<h4 style='color:red;'>Loged out successfully!</h4>";
+	}
+	else{
+
+		;
+	}
+	// destroy the session 
+	session_destroy(); 
+
+?>
+
 <!DOCTYPE html>
+
+
 <html>
 	<title>AMS</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +30,7 @@
       <link rel="stylesheet" href="../css/w3-theme-blue-grey.css">
       <link rel='stylesheet' href='../css/opensan.css'>
       <link rel="stylesheet" href="../css/font-awesome.min.css">
+
       <style>
 	        html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	        input:hover{
@@ -172,7 +196,15 @@
 					</div>
 					<div class="w3-container w3-cell">
 					<form action="loginauth.php" method="post" enctype="text" >
-						   <br/><br/>
+						   <br/>
+						   	<div class="logedout" >
+						   		    <?php 
+								    	if(array_key_exists('login_message', $GLOBALS))
+								    	echo $GLOBALS['login_message'];
+								    ?>
+						   	</div>
+						   <br/>
+
 							<div class="group">      
 						      <input type="text" name="usr_id" required>
 						      <span class="highlight"></span>

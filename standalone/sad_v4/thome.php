@@ -1,22 +1,12 @@
 <?php
-	$teacher_id=$_GET['usr_id'];
-
-	#include ("thome_top.php");
-	$conn = mysqli_connect("localhost","root","","ams");
-	if (mysqli_connect_errno())
-  	{
-  		echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  		die();
-  	}
-  	$query ="SELECT `first_name`,`last_name` FROM `teacher` WHERE id='$teacher_id';";
-  	$result = mysqli_query($conn, $query);
-  	$teacher_name=mysqli_fetch_row($result);
-		function get_gender($roll){
-			$str="SELECT gender  FROM `teacher` WHERE 
-			id=".$GLOBALS['teacher_id'].";";
-			$val= mysqli_fetch_row(mysqli_query($GLOBALS['conn'], $str))[0];
-			return $val;
+	session_start();
+		if(!isset($_SESSION["usr_id"]))
+		{	$_SESSION['logedout'] = true;
+			header("location:login.php");
 		}
+	$teacher_id=$_SESSION["usr_id"];
+
+	include 'connection.php';
 ?>		
 <!DOCTYPE HTML>
 <html lang="en">
@@ -49,10 +39,21 @@
 		    }
 		</style>
 				<script type='text/javascript'>
-			function fun(div){
+			/*function fun(div){
 				var atributes=[];
 			    atributes.push("attendence_page.php?teacher_id="+
-			    	<?php echo $teacher_id?>);
+			    	< ?php echo $teacher_id?>);
+			    var list =(div.getElementsByTagName('span'));
+			    for (var i=0;i<list.length;i++){
+				atributes.push(list[i].getAttribute('id')+'='+list[i].innerHTML);
+			    }
+			    var link=atributes.join('&');
+			    alert(link);
+			    window.location=link;
+			}*/
+			function fun(div){
+				var atributes=[];
+			    atributes.push("attendence_page.php?");
 			    var list =(div.getElementsByTagName('span'));
 			    for (var i=0;i<list.length;i++){
 				atributes.push(list[i].getAttribute('id')+'='+list[i].innerHTML);
@@ -61,30 +62,16 @@
 			    alert(link);
 			    window.location=link;
 			}
+
 		</script>
 	</head>
 
 	<body>
 		<!--Nav bar-->
-		    <div class="w3-top w3-card-4" style="height:200px; ">
-		       	<div class="w3-bar w3-theme-d2 w3-left-align w3-large" style="height:100%; z-index: -1; position:relative;overflow:visible;">
-			       	<a class=" w3-bar-item w3-left  w3-theme-d2" >
-					  <b class="w3-opacity" style="font-size: 50px;">Attendance Management System</b>
-					</a>
-			        <br/><br/>
-			        <div class="w3-dropdown-hover w3-bar-item w3-right" >
-					    <a href="login.html" class=" w3-btn w3-hide-small w3-padding-large w3-hover-white" title="My Account">
-				        <?php echo $teacher_name[0]." ".$teacher_name[1];?>&nbsp&nbsp
-					        <img src="../w3/w3images/avatar<?php echo get_gender($teacher_id)=="Male"? 3:4; ?>.png" class="w3-circle" style="height:80px;width:80px" alt="Avatar">
-					    </a>
-					    <div class="w3-dropdown-content w3-bar-block w3-card-4 "  >
-					    	<a href="login.html"  class="w3-bar-item w3-button">Home</a>
-					      <a href="login.html" class="w3-bar-item w3-button">Log out</a>
-					    </div>
-					</div>
-			        
-		       	</div>
-		    </div>
+		<?php
+			$account_type="teacher";
+			include 'nav_bar.php';
+		?>
 	    <!--Nav bar end-->
 	    <!--main page-->
 	    <div class="w3-container  " style="max-width:800px;margin-top:80px; ">  
