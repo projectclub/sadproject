@@ -159,7 +159,7 @@
 
 		<footer class="w3-container w3-theme-d5 w3-bottom" style="z-index: -1; position:relative;background-color: white;">
 			<p>
-				<a>by shivam</a>
+				<a>By Shivam, Anand, Shivani, Anoop</a>
 			</p>
 		</footer>
 	</body>

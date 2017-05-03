@@ -24,7 +24,7 @@
 		}
 		elseif ($account_type=='admin')
 		{
-			header("location:../sadproject/student_entry.php");
+			header("location:../admin/student_entry.php");
 		}
 		else
 		{
