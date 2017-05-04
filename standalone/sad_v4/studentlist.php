@@ -1,7 +1,8 @@
 
 	<?php
 		//==========Get data===================
-		$teacher_id=$_POST['teacher_id'];
+		session_start();
+		$teacher_id=$_SESSION['usr_id'];
 		$course_id=$_POST['course_id'];  
 		$course_year=$_POST['course_year'];
 		$sem=$_POST['sem'];
@@ -9,12 +10,7 @@
 		$date=$_POST['date'];
 		//===================================
 		//=============sql connect===========
-		$conn = mysqli_connect("localhost","root","","ams");
-		if (mysqli_connect_errno())
-	  	{
-	  		echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	  		die();
-	  	}
+		include 'connection.php';
 	  	//===========================================
 
 	  	//==============functions======================
@@ -28,18 +24,26 @@
 			return ($att=="Present")?'class="w3-button w3-white w3-xlarge w3-right w3-hover-green" >Present':'class="w3-button w3-white w3-xlarge w3-right w3-hover-red" >Absent';
 		}
 		function get_students_att_total($roll){
-			$str="SELECT periodcode, `date`, count(*) as rows FROM `attendence_table` WHERE 
+			$sel="SELECT periodcode, `date`, count(*) as rows FROM `attendence_table` WHERE 
 			roll=".$roll." AND
 			course_id=".$GLOBALS['course_id']." AND 
 			teacher_id=".$GLOBALS['teacher_id']." AND 
 			`sem`=".$GLOBALS['sem']." AND
-			attendence='Present'
-			GROUP BY periodcode, `date`;";
-			if($GLOBALS['total']>0)
-			$val= mysqli_num_rows(mysqli_query($GLOBALS['conn'], $str	));
+			attendence='Present' ";
+
+			$constraint=" GROUP BY periodcode, `date`";
+			if($GLOBALS['total']>0){
+			$val= mysqli_num_rows(mysqli_query($GLOBALS['conn'], $sel.$constraint));
+
+			$result=mysqli_query($GLOBALS['conn'], $sel."And `class_type`='lab'".$constraint);
+			if($result)
+			$val+=mysqli_num_rows($result);
+			
+		}
 			else $val=0;
 			return $val;
 		}
+
 		function get_gender($roll){
 			$str="SELECT gender  FROM `student` WHERE 
 			roll=".$roll.";";
@@ -54,17 +58,24 @@
 			course_id=".$course_id." AND 
 			teacher_id=".$teacher_id." AND 
 			periodcode='".$periodcode."' AND
-			`sem`=".$sem;
+			`sem`=".$sem ;
+
 		$check_query="SELECT count(*) FROM `attendence_table` WHERE
+			".$SelectConstraints;
+		$class_type_qry="SELECT DISTINCT `class_type`   FROM `attendence_table` WHERE
 			".$SelectConstraints;
 	  	//===========================================
 		//===total classes of course=============
-		$total_query="SELECT periodcode, `date`, count(*) as rows FROM `attendence_table` WHERE 
+		$total_sel_query="SELECT periodcode, `date`, count(*) as rows FROM `attendence_table` WHERE 
 			course_id=".$course_id." AND 
 			teacher_id=".$teacher_id." AND 
-			`sem`=".$sem." 
-			GROUP BY periodcode, `date`;";
-		$total=mysqli_num_rows(mysqli_query($conn,$total_query ));
+			`sem`=".$sem; 
+		$total_const=" GROUP BY periodcode, `date`;";
+		$total=mysqli_num_rows(mysqli_query($conn,$total_sel_query.$total_const ));
+
+		$result=mysqli_query($conn, $total_sel_query." And `class_type`='lab'".$total_const);
+		//if($result)
+		$total+=mysqli_num_rows($result);
 		if(!($total>0))
 			$total=0;
 		//=========================================
@@ -78,8 +89,12 @@
 		//	$update_flag=0;
 
 		//===============================================Form printing===========================================================
-		if($update_flag>0)
+		if($update_flag>0){
 			echo "<p>Entry Already Present</p>";
+			
+			$class_type=mysqli_fetch_row(mysqli_query($conn, $class_type_qry))[0];
+			
+		}
 		//============================================
 
 		?>
@@ -128,7 +143,17 @@
 		</ul>
 					<br/>
 			<br/>
+						
+
 			<br/>
+			<?php echo "<a>'".$class_type."'</a>"; ?>			
+			<script >
+				$( document ).ready(function() {
+				  // Handler for .ready() called.
+				$($("#class_type").val(<?php echo "'".$class_type."'"; ?>));
+				});
+				//$("#class_type").val();
+			</script>
 
 		<!-- save end button-->
 <?php 

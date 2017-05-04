@@ -23,12 +23,7 @@
       <link rel='stylesheet' href='../css/font-awesome.min.css'>
 	    <style>
 	    html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
-	    </style>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-		<link rel="stylesheet" type="text/css" href="../calender/codebase/fonts/font_roboto/roboto.css"/>
-		<link rel="stylesheet" type="text/css" href="../calender/codebase/dhtmlxcalendar.css"/>
-		<script src="../calender/codebase/dhtmlxcalendar.js"></script>
-		
+	    </style>		
 
 		<script src="../jquery/jquery-3.2.1.min.js"></script>
 		<style type="text/css" src="style.css"></style>
@@ -41,6 +36,7 @@
 					var $attendence= div.find("#present_btn").html();
 					var $periodcode=$("#periodcodeselect").val();
 					var $date =$("#date").val() ;
+					var $class_type=$("#class_type").val();
 					$.post("save_attendence.php",
 				        {
 				          id:$id,
@@ -51,7 +47,8 @@
 				          teacher_id:$teacher_id,
 				          sem:$sem,
 				          periodcode:$periodcode,
-				          date:$date
+				          date:$date,
+				          class_type:$class_type
 				        },
 				        function(data,status){
 				            alert("Data: " + data + "\nStatus: " + status);
@@ -163,6 +160,22 @@
 
 				loadlist();	
 			}
+
+
+			$(document).ready(function(){
+				$(document).on("change","#class_type",function(){
+					if($('#class_type').val()=='lab')
+					{
+						$("#periodcodeselect option[value='m12']").hide();
+						$("#periodcodeselect option[value='e4']").hide();
+					}
+					else
+					{
+						$("#periodcodeselect option[value='m12']").show();
+						$("#periodcodeselect option[value='e4']").show();
+					}
+				});
+			});
 		</script>
 		<script type="text/javascript" src="div_sorter.js">
 
@@ -187,7 +200,12 @@
 				</h3>
 				<br/>
 				<a>Date:</a> <input type="date" class="w3-theme-d2" id= date name="date" onchange="myfunction()">
-				<a id="day"></a>
+				<a><span id="day" ></span>&nbsp&nbsp
+				<select id="class_type" class="w3-right  w3-theme-d2">
+					<option value="leq">lecture</option>
+					<option value="lab">lab</option>
+					<option value="tut">tutorial</option>
+				</select></a>
 
 				<select id="periodcodeselect" class="w3-select w3-theme-d2" onchange="loadlist()">
 					<option value="m9">Morning 9 O'clock </option>

@@ -11,10 +11,12 @@
 	$date=$_POST['date'];
 	$teacher_id=$_POST['teacher_id'];
 	$periodcode=$_POST['periodcode'];
-	
+	$class_type=$_POST['class_type'];
 	$sem=$_POST['sem'];
 	
-	$insert_query ="INSERT INTO `attendence_table`( `roll`, `date`, `course_id`, `teacher_id`, `periodcode`, `attendence`,  `sem`) VALUES (".$id.",'".$date."',".$course_id.", ".$teacher_id.",'".$periodcode."','".$attendence."',".$sem.");";
+	include 'connection.php';
+
+	$insert_query ="INSERT INTO `attendence_table`( `roll`, `date`, `course_id`, `teacher_id`, `periodcode`, `attendence`,  `sem`, `class_type`) VALUES (".$id.",'".$date."',".$course_id.", ".$teacher_id.",'".$periodcode."','".$attendence."',".$sem.",'".$class_type."');";
 	
 	$update_query="UPDATE `attendence_table` SET `attendence`='".$attendence."' WHERE 
 		id=".$id." AND
@@ -25,12 +27,6 @@
 		sem=".$sem.
 	";";
 
-	$conn = mysqli_connect("localhost","root","","ams");
-	if (mysqli_connect_errno())
-	{
-		echo "Failed to connect to MySQL: " . mysqli_connect_error();
-		die();
-	}
 	if(mysqli_query($conn, $insert_query)==1){
 		echo "1 inserted ";
 	}
@@ -40,5 +36,7 @@
 	else{
 		echo "0 error ";
 	}
-	echo $id." ".$first_name.$last_name.$attendence. " ".$course_id. " ".$teacher_id. " ".$date.$periodcode.$sem ;
+	echo $id." ".$first_name.$last_name.$attendence. " ".$course_id. " ".$teacher_id. " ".$date.$periodcode.$sem." ".$class_type;
+ 
+
 ?>
