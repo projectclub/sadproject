@@ -32,20 +32,44 @@
 			
 		}
 	}
-	$user;
-	if($account_type=="teacher")
-		$user=new usr($teacher_id,$account_type);
-	if($account_type=="student")
-		$user=new usr($student_id,"student");
+
 ?>
-<div class="w3-top w3-card-4" style="height:200px; ">
+<style type="text/css">
+	@media screen and (max-width: 1093px) {
+    #nav_dropdown {
+        display: none !important;
+    }
+    #menu{
+    	display:inline-block !important;
+    }
+    #nav_bar{
+    	height: 240px !important;
+    }
+    #main-content{
+    	top:200px !important;
+	}
+	/*@media screen and (max-width: 826px) {
+    }*/
+}
+</style>
+<div id="nav_bar" class="w3-top w3-card-4" style="height:200px; ">
    	<div class="w3-bar w3-theme-d2 w3-left-align w3-large" style="height:100%; z-index: -1; position:relative;overflow:visible;">
-       	<a class=" w3-bar-item w3-left  w3-theme-d2" >
-		  <b class="w3-opacity" style="font-size: 50px;">Attendance Management System</b>
+       	<a id="menu" href="logout.php" class="w3-bar-item w3-btn w3-padding-large w3-theme-d4 w3-left" style="display: none;"><i class="fa fa-home w3-margin-right"></i>Log out</a>
+       	<a class=" w3-bar-item w3-left  w3-theme-d2" style="text-align: center;">
+
+		  <b class="w3-opacity " style="font-size: 50px;;">Attendance Management System</b>
 		</a>
+		<?php 
+			if(isset($_SESSION['account_type'])){ 
+					$user;
+				if($_SESSION['account_type']=="teacher")
+					$user=new usr($teacher_id,$account_type);
+				if($_SESSION['account_type']=="student")
+					$user=new usr($student_id,"student");
+		?>
         <br/><br/>
-        <div class="w3-dropdown-hover w3-bar-item w3-right" >
-		    <a href="login.html" class=" w3-btn w3-hide-small w3-padding-large w3-hover-white" title="My Account">
+        <div id="nav_dropdown" class="w3-dropdown-hover w3-bar-item w3-right" >
+		    <a href="#" class=" w3-btn w3-hide-small w3-padding-large w3-hover-white" title="My Account">
 	        <?php echo $user->name;?>&nbsp&nbsp
 		        <img src=<?php echo $user->image; ?> class="w3-circle" style="height:80px;width:80px" alt="Avatar">
 		    </a>
@@ -54,6 +78,7 @@
 		      <a href="logout.php" class="w3-bar-item w3-button">Log out</a>
 		    </div>
 		</div>
+		<?php }?>
         
    	</div>
 </div>

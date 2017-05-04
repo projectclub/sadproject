@@ -38,6 +38,9 @@
 		}
 	}
 	else
-		echo "\nUser id and password does not macth any account";
+		{
+			$_SESSION["incorrect_cred"]=True;
+		header("location:login.php");
+	}
 
 ?>

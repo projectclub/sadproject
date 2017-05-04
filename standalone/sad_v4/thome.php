@@ -12,33 +12,16 @@
 <html lang="en">
 	<head>
 		<title>AMS</title>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="../w3/w3css/4/w3.css">
-      <link rel="stylesheet" href="../css/w3-theme-blue-grey.css">
-      <link rel='stylesheet' href='../css/opensan.css'>
-      <link rel="stylesheet" href="../css/font-awesome.min.css">
-      <style>
+      	<link rel="stylesheet" href="../css/w3-theme-blue-grey.css">
+    	<link rel='stylesheet' href='../css/opensan.css'>
+      <link rel='stylesheet' href='../css/font-awesome.min.css'>
+    	<style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
-      </style>
-		<style>
-			footer {
-		        height: 50px;
-				width: 100%;
-				left: 0;
-		        right: 0;
-				bottom: 0;
-				text-align: center;
-			    position: absolute;
-			}
-		    #main-wrapper{
-		    	top:100px;
-		        min-height: 100%;
-			    padding: 0 0 100px;
-			    position: relative;
-		    }
-		</style>
-				<script type='text/javascript'>
+      	</style>
+		<script type='text/javascript'>
 			/*function fun(div){
 				var atributes=[];
 			    atributes.push("attendence_page.php?teacher_id="+
@@ -64,9 +47,11 @@
 			}
 
 		</script>
+		<link rel="stylesheet" href="pg_frame.css">
 	</head>
 
-	<body>
+	<body >
+	<div id="main-wrapper">
 		<!--Nav bar-->
 		<?php
 			$account_type="teacher";
@@ -74,18 +59,20 @@
 		?>
 	    <!--Nav bar end-->
 	    <!--main page-->
-	    <div class="w3-container  " style="max-width:800px;margin-top:80px; ">  
-		    <div class="w3-container " style="padding-left: 0;padding-right: 0; z-index: +1; position:relative;background-color: white;">    
+	    <div id="main-content" class="w3-container  " style="max-width:800px;top:80px;position:relative;">
+		    <div class="w3-container " style="padding-left: 0;padding-right: 0; z-index: +1; position:relative;">    
 	      <!-- The Grid -->
-	      		 <div class="w3-card-4 w3-padding-64 w3-border " style="padding-left: 30px;">
+	      		 <div id="title" class="w3-card-4 w3-padding-64 w3-border " style="padding-left: 30px;background-color: white;">
 					<h2 class="w3-jumbo">Courses</h2>
 				</div>
-				<ul id="courselist " class="w3-ul " >
+				<br/>
+				<div class ="w3-card" style="background-color: white;">
+				
+				<ul id="courselist " class=" w3-ul " >
 						<?php	
 						$query ="SELECT * FROM `course` WHERE teacher_id='$teacher_id';";
 						$result = mysqli_query($conn, $query);
 					    $row = mysqli_fetch_all($result);
-					    printf("<br/>");
 				    foreach ($row as  $value) {
 				    	# code...
 				    	?>
@@ -101,16 +88,14 @@
 						<?php
 				    } 
 				    	?>
-			    	<li></li>
 				</ul>
+				</div>
 			</div>
 		</div>
 		<br/>
-		<footer class="w3-container w3-theme-d5 ">
-			<p>
-				<a>By Shivam, Anand, Shivani, Anoop</a>
-			</p>
-		</footer>
+		<!--Footer-->
+		<?php include 'footer.php';?>
+	</div>
 	</body>
 </html>
 <?php 

@@ -20,28 +20,10 @@
 	    <link rel="stylesheet" href="../w3/w3css/4/w3.css">
       <link rel="stylesheet" href="../css/w3-theme-blue-grey.css">
       <link rel='stylesheet' href='../css/opensan.css'>
-      <link rel="stylesheet" href="../css/font-awesome.min.css">
+      <link rel='stylesheet' href='../css/font-awesome.min.css'>
 	    <style>
 	    html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	    </style>
-		<style>
-			footer {
-		        height: 50px;
-				width: 100%;
-				left: 0;
-		        right: 0;
-				bottom: 0;
-				text-align: center;
-			    position: relative;
-			}
-		    #main-wrapper{
-		    	top:100px;
-		        min-height: 100%;
-			    padding: 0 0 100px;
-			    position: relative;
-		    }
-
-		</style>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<link rel="stylesheet" type="text/css" href="../calender/codebase/fonts/font_roboto/roboto.css"/>
 		<link rel="stylesheet" type="text/css" href="../calender/codebase/dhtmlxcalendar.css"/>
@@ -118,12 +100,12 @@
 								if($(list[i]).html()=="Present")
 								{
 									$(list[i]).html("Absent");
-									$(list[i]).attr('class',"w3-button w3-white w3-xlarge w3-right w3-hover-red");
+									$(list[i]).attr('class',"w3-btn w3-white w3-xlarge w3-right w3-hover-red");
 								}
 								else
 								{
 									$(list[i]).html("Present");
-									$(list[i]).attr('class',"w3-button w3-white w3-xlarge w3-right w3-hover-green");
+									$(list[i]).attr('class',"w3-btn w3-white w3-xlarge w3-right w3-hover-green");
 								}
 							}
 				    }
@@ -182,58 +164,15 @@
 				loadlist();	
 			}
 		</script>
-		<script type="text/javascript">
-			var sorterfn ={
-				by_id:function(a,b){
-					return parseInt($(a).find("#roll").text(),10) >
-						parseInt($(b).find("#roll").text(),10);
-				},
-				by_per:function(a,b){
-					return $(a).find("#present").text() >
-						$(b).find("#present").text();
-				},
-				by_name:function(a,b){
-					return $(a).find("#first_name").text()+$(a).find("#last_name").text() >
-						$(b).find("#first_name").text()+$(b).find("#last_name").text();
-				},
-				by_check:function(a,b){
-					return ($(a).find("#present_btn").text()) >
-						($(b).find("#present_btn").text());
-				}
-			};
-			function sorter(comp_by){
-				var sort=[].sort();
-				var $StudentListContainer =$("li.student");
-				var OrderedDivs =$StudentListContainer.sort(comp_by);
-				$("#StudentListContainer").html(OrderedDivs);
-			};
-			function rev_sorter(comp_by){
-				var $StudentListContainer =$("li.student");
-				var OrderedDivs =$StudentListContainer.sort(function(a,b){
-					return !comp_by(a,b)
-				});
-				$("#StudentListContainer").html(OrderedDivs);
-			};
-			var order='DSC';
+		<script type="text/javascript" src="div_sorter.js">
 
-			function reorderdiv(BY){
-				if(BY==order)
-				{
-					alert("reordering "+order+"=>"+'DSC');
-					rev_sorter(sorterfn[BY]);
-					order='DSC';
-				}
-				else
-				{
-					alert("reordering "+order+"=>"+BY);
-					sorter(sorterfn[BY]);
-					order=BY;
-				}
-			};
 		</script>
+			
+		<link rel="stylesheet" href="pg_frame.css">
 	</head>
 
 	<body>
+	<div id="main-wrapper">
 		<!--Nav bar-->
 		<?php
 			$account_type="teacher";
@@ -241,7 +180,7 @@
 		?>
 	    <!--Nav bar end-->
 	    	    <!--main page-->
-	    <div class="w3-container  " style="max-width:800px;margin-top:80px; ">    
+	    <div id="main-content" class="w3-container  " style="max-width:800px;top:80px;position:relative;">    
 			<div class="w3-panel  w3-theme-d2 w3-card-4" style="z-index: +1; position:relative;background-color: white;">
 				<h3>Class :
 				<?php echo $course_id ." ".$course_name ." ". $course_year ." sem: ".$sem;	?>	
@@ -266,6 +205,7 @@
 				
 				<ul class="w3-ul ">
 				<li class='w3-padding-16'>
+					<span>Sort By</span>
 					<span class="w3-button w3-bar-item" id="byid" onclick="reorderdiv('by_id')"> Id</span>
 					<span class="w3-button w3-bar-item" id="byalph"  onclick="reorderdiv('by_name')" >Name</span>
 					<span class="w3-button w3-bar-item" id="bycheck"  onclick="reorderdiv('by_check')" >Check</span>
@@ -280,10 +220,8 @@
 
 		</div>
 		<br/>
-		<footer class="w3-container w3-theme-d5 ">
-			<p>
-				<a>By Shivam, Anand, Shivani, Anoop</a>
-			</p>
-		</footer>
+		<!--Footer-->
+		<?php include 'footer.php';?>
+		</div>
 	</body>
 </html>
