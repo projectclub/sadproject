@@ -33,13 +33,12 @@
 
 			$constraint=" GROUP BY periodcode, `date`";
 			if($GLOBALS['total']>0){
-			$val= mysqli_num_rows(mysqli_query($GLOBALS['conn'], $sel.$constraint));
+				$val= mysqli_num_rows(mysqli_query($GLOBALS['conn'], $sel.$constraint));
 
-			$result=mysqli_query($GLOBALS['conn'], $sel."And `class_type`='lab'".$constraint);
-			if($result)
-			$val+=mysqli_num_rows($result);
-			
-		}
+				$result=mysqli_query($GLOBALS['conn'], $sel."And `class_type`='lab'".$constraint);
+				if($result)
+				$val+=mysqli_num_rows($result);
+			}
 			else $val=0;
 			return $val;
 		}
@@ -100,7 +99,7 @@
 		?>
 		<!--student list-->
 		<div id='StudentListContainer'>
-			<ul class="w3-ul ">
+			<tbody class="w3-ul ">
 				<?php
 			 	//==============Loop to print all students====================
 				$result = mysqli_query($conn, $query);
@@ -130,7 +129,7 @@
 		    }
 			    //==============Loop End========================
 			?>
-			</ul>
+			</tbody>
 
 		</div>
 		<!-- student list end-->

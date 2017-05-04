@@ -20,36 +20,7 @@
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     </style>
-	<style>
-			div.scrolllist {
-			    overflow: auto;
-			    white-space: nowrap;
-			}
-
-			div.scrolllist a span {
-			    display: inline-block;
-			    color: white;
-			    text-align: center;
-			    padding: 14px;
-			    text-decoration: none;
-			}
-			div.scrolllist a span.info {
-				position: relative;
-			    display: none;
-			    text-align: center;
-			    padding: 14px;
-			    text-decoration: none;
-			}
-			div.scrolllist a:hover span{
-			    display: none;
-			}
-			div.scrolllist a:hover .info{
-			    display: inline-block;
-			    float:bottom;
-			    transition: visibility 0.5s;
-			}
-			
-			</style>
+	<link  rel="stylesheet" href="scrollable_table.css">
 	<link rel="stylesheet" href="pg_frame.css">
 	</head>
 

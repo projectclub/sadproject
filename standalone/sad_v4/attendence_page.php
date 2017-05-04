@@ -26,7 +26,6 @@
 	    </style>		
 
 		<script src="../jquery/jquery-3.2.1.min.js"></script>
-		<style type="text/css" src="style.css"></style>
 		<script type="text/javascript" id="responsive" >
 			var resp = function (div){ ;}
 			function savestudent(div){
@@ -180,6 +179,20 @@
 		<script type="text/javascript" src="div_sorter.js">
 
 		</script>
+		<script type="text/javascript">
+
+			var course_id=<?php echo $course_id?> ;
+			var sem=<?php echo $sem?> ;
+			var course_year=<?php echo $course_year ?>;
+			var course_name=<?php echo "'".$course_name."'"; ?>;
+			$(document).ready(function(){
+				$(document).on("click","#table_link",function(){
+					var link="attendance_table.php?course_id="+course_id+"&course_name="+course_name+"&course_year="+course_year+"&sem="+sem;
+				    alert(link);
+				    window.location=link;
+				});
+			});
+		</script>
 			
 		<link rel="stylesheet" href="pg_frame.css">
 	</head>
@@ -195,6 +208,7 @@
 	    	    <!--main page-->
 	    <div id="main-content" class="w3-container  " style="max-width:800px;top:80px;position:relative;">    
 			<div class="w3-panel  w3-theme-d2 w3-card-4" style="z-index: +1; position:relative;background-color: white;">
+				<div id="table_link" class="w3-right w3-button w3-hover-black" ><br/>Table</div>
 				<h3>Class :
 				<?php echo $course_id ." ".$course_name ." ". $course_year ." sem: ".$sem;	?>	
 				</h3>
@@ -237,6 +251,8 @@
 			</div>
 
 		</div>
+
+			
 		<br/>
 		<!--Footer-->
 		<?php include 'footer.php';?>
