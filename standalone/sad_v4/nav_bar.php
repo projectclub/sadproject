@@ -50,6 +50,7 @@
 	}
 	/*@media screen and (max-width: 826px) {
     }*/
+    }
 }
 </style>
 <div id="nav_bar" class="w3-top w3-card-4" style="height:200px; ">
@@ -57,7 +58,7 @@
        	<a id="menu" href="logout.php" class="w3-bar-item w3-btn w3-padding-large w3-theme-d4 w3-left" style="display: none;"><i class="fa fa-home w3-margin-right"></i>Log out</a>
        	<a class=" w3-bar-item w3-left  w3-theme-d2" style="text-align: center;">
 
-		  <b class="w3-opacity " style="font-size: 50px;;">Attendance Management System</b>
+		  <b class="w3-opacity " style="font-size: 50px;">Attendance Management System</b>
 		</a>
 		<?php 
 			if(isset($_SESSION['account_type'])){ 
@@ -68,8 +69,16 @@
 					$user=new usr($student_id,"student");
 		?>
         <br/><br/>
-        <div id="nav_dropdown" class="w3-dropdown-hover w3-bar-item w3-right" >
-		    <a href="#" class=" w3-btn w3-hide-small w3-padding-large w3-hover-white" title="My Account">
+        <style type="text/css">
+        	.txtshw{
+        		text-shadow: 3px 3px 2px #1a1a1a;
+        	}
+        	.txtshw:hover{
+        		text-shadow: 3px 3px 2px grey;
+        	}
+        </style>
+        <div id="nav_dropdown" class="txtshw w3-dropdown-hover w3-bar-item w3-right" >
+		    <a href="#" class=" w3-btn w3-hide-small w3-padding-large w3-hover-white" title="My Account" >
 	        <?php echo $user->name;?>&nbsp&nbsp
 		        <img src=<?php echo $user->image; ?> class="w3-circle" style="height:80px;width:80px" alt="Avatar">
 		    </a>

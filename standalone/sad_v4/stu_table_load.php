@@ -107,7 +107,7 @@
 			    foreach ($row as  $value) {
 			    	# code...
 			    ?>
-			    	<li class='student w3-padding-16' id="ll"> 
+			    	<tr class='student w3-padding-16' id="ll"> 
 			    	<span id="present_btn"  <?php echo get_attendence($value[0]) ?></span>
 				    <img src="../w3/w3images/avatar<?php echo get_gender($value[0])=='Male'? 2:6; ?>.png" class="w3-left w3-circle w3-margin-right" style="width:50px"> 
 				    	&nbsp <span id='roll'><?php echo $value[0]?></span>
@@ -133,13 +133,6 @@
 
 		</div>
 		<!-- student list end-->
-
-		<!-- save button-->
-		<ul class="w3-ul " style="align-items: right;">
-		<li class=' w3-padding-16'> 
-			<br/><h3 type="text" class="w3-btn  btn w3-hover-green w3-text-red" style="float: right;" id="SaveForm"  value="Save">Save</h3>
-			</li>
-		</ul>
 					<br/>
 			<br/>
 						

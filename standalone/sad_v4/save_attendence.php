@@ -26,17 +26,33 @@
 		periodcode='".$periodcode."' AND
 		sem=".$sem.
 	";";
+	$check_exits="SELECT DISTINCT `course_id` FROM `attendence_table` 
+	WHERE id=".$id." AND
+		date='".$date."' AND
+		periodcode='".$periodcode."' AND
+		sem=".$sem.
+	";";
+
 
 	if(mysqli_query($conn, $insert_query)==1){
-		echo "1 inserted ";
-	}
-	else if(mysqli_query($conn, $update_query)==1){
-		echo "2 updated ";
+		echo "1 inserted ";		
 	}
 	else{
-		echo "0 error ";
+		if( mysqli_errno($conn) == 1062 ) {
+	    // Duplicate key
+			$result=mysqli_query($conn, $check_exits);
+			if(mysqli_num_rows($result)>=0&&mysqli_fetch_row($result)[0]==$course_id){
+				if(mysqli_query($conn, $update_query)==1)
+					echo "2 updated ";
+			}
+			else
+				echo "student attended some other class at this time!";
+		} 
+		else {
+		    // ZOMGFAILURE
+		    echo "0 error";
+		}
 	}
 	echo $id." ".$first_name.$last_name.$attendence. " ".$course_id. " ".$teacher_id. " ".$date.$periodcode.$sem." ".$class_type;
  
-
 ?>

@@ -139,6 +139,8 @@
 		<ul class="w3-ul " style="align-items: right;">
 		<li class=' w3-padding-16'> 
 			<br/><h3 type="text" class="w3-btn  btn w3-hover-green w3-text-red" style="float: right;" id="SaveForm"  value="Save">Save</h3>
+				
+			
 			</li>
 		</ul>
 					<br/>
@@ -149,7 +151,8 @@
 			<script >
 				$( document ).ready(function() {
 				  // Handler for .ready() called.
-				$($("#class_type").val(<?php echo "'".$class_type."'"; ?>));
+					$($("#class_type").val(<?php echo "'".$class_type."'"; ?>));
+					
 				});
 				//$("#class_type").val();
 			</script>

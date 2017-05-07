@@ -29,60 +29,60 @@
 	    </style>		
 
 		<script src="../jquery/jquery-3.2.1.min.js"></script>
-		<style>
-			table {
-			    border-collapse: collapse;
-			    border-spacing: 0;
-			    width: 100%;
-			    border: 1px solid #ddd;
-			}
 
-			th, td {
-			    border: none;
-			    text-align: left;
-			    padding: 8px;
-			    width: 50px;
-			}
-			tbody tr{
-				height: 60px !important;
-
-			}
-			thead{
-				line-height: 150px;
-				min-height: 150px
-
-			}
-			thead tr {
-				white-space: nowrap;
-			  overflow: hidden;
-
-
-			}
-			th {
-
-			/* Safari */
-			-webkit-transform: rotate(-90deg);
-
-			/* Firefox */
-			-moz-transform: rotate(-90deg);
-
-			/* IE */
-			-ms-transform: rotate(-90deg);
-
-			/* Opera */
-			-o-transform: rotate(-90deg);
-
-			/* Internet Explorer */
-			filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-
-			}
-
-
-			tr:nth-child(even){background-color: #f2f2f2}
-			</style>
 			
 		<link rel="stylesheet" href="pg_frame.css">
+		<style>
+			table, th, td {
+			    border: none;
+			}
+			.info{
+				overflow: hidden;
+				white-space: nowrap;
+				width:250px;
+				height: 50px;
 
+				position: absolute;
+				transform: translate(20px,-50px);
+			}
+
+			.rotate{
+				height:150px;
+				white-space: nowrap;
+			}
+			th.rotate >div{
+				transform: translate(5px, 110px)
+				rotate(270deg);
+				width:30px;
+			}
+			th.rotate > div > span {
+			  border-bottom: 1px solid #ccc;
+			  padding: 5px 10px;
+			}
+			/*th.rotate:nth-last-child(2){
+				
+				position: absolute;
+				transform: translate(20px,-50px);
+			}*/
+			{
+				/* Safari */
+				-webkit-transform: rotate(-90deg);
+
+				/* Firefox */
+				-moz-transform: rotate(-90deg);
+
+				/* IE */
+				-ms-transform: rotate(-90deg);
+
+				/* Opera */
+				-o-transform: rotate(-90deg);
+
+				/* Internet Explorer */
+				filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+				}
+			tr:nth-child(even), tbody .info:nth-child(odd){background-color: #f2f2f2}
+		</style>
 	</head>
 
 	<body>
@@ -94,7 +94,7 @@
 		?>
 	    <!--Nav bar end-->
 	    	    <!--main page-->
-	    <div id="main-content" class="w3-container  " style="max-width:800px;top:80px;position:relative;">    
+	    <div id="main-content" class="w3-container  " style="max-width:70%;top:80px;position:relative;">    
 			<div class="w3-panel  w3-theme-d2 w3-card-4" style="z-index: +1; position:relative;background-color: white;">
 				<h3>Class :
 				<?php echo $course_id ." ".$course_name ." ". $course_year ." sem: ".$sem;	?>	
@@ -103,10 +103,7 @@
 			</div>	
 
 			<div class="w3-card-4 w3-padding w3-border" style="z-index: +1; position:relative;background-color: white;"">
-				<br/>
-				<a>Student List</a>
-				<br/>
-				<br/>
+				
 				<div style="overflow-x:auto;">
 				<table class="w3-table " >
 				<?php
@@ -137,19 +134,19 @@
 						$student_list = array();
 				?>
 						<thead>
-							<tr class='w3-padding-16'>
-							<th>Info</th>
-							<?php
-									///Attendence
-									foreach ($class_days as $value) {
-										# code...
-										echo "<th  width='25%'><span>".$value[0]."-".$value[1]."</span></th>";
-									}
+							<tr >
+								<th class="rotate info"><div><span>Info</span></div></th>
+								<?php
+										///Attendence
+										foreach ($class_days as $value) {
+											# code...
+											echo "<th class='rotate date'><div><span>".$value[0]."-".$value[1]."</span></div></th>";
+										}
 
-							?>
-							<th>classes Attended</th>
-							<th>Percentage</td>
-							</tr>						
+								?>
+								<th class="rotate"><div><span>classes Attended</span></div></th>
+								<th class="rotate"><div><span>Percentage</span></div></td>
+							</tr>					
 						</thead>
 					<?php
 						foreach ($result as $value) {
@@ -171,20 +168,22 @@
 							}	
 						//print_r($student_list);	
 
+						?><tbody ><tr><td>&nbsp</td></tr><?php
 							foreach ($student_list as $roll => $value) {
 								# code...
 								
 								?>
-						<tbody>
-							<tr  style="width:100%; text-align: left;">
-								<td>
+							
+							<tr>  <!-- style="width:100%; text-align: left;"> -->
+								<td >
+									<div style="width: 300px;height: 50px"></div>
+									<div class="info">
 									<img src="../w3/w3images/avatar<?php echo ($value[2]=='Male')? 2:6; ?>.png" class="w3-left w3-circle w3-margin-right" style="width:50px"> 
-							    	&nbsp <span id='roll'><?php echo $roll ;?></span>
-							    	<br/>
-						    		
-						    		&nbsp <span id='first_name'><?php echo $value[0]?></span> 
-						    		&nbsp <span id='last_name'><?php echo $value[1]?></span> 
-			    		
+								    	<span id='roll'><?php echo $roll ;?></span>
+								    	<br/>
+							    		<span id='first_name'><?php echo $value[0]?></span> 
+							    		<span id='last_name'><?php echo $value[1]?></span> 
+			    					</div>
 								</td>
 								<?php
 								///Attendence
@@ -197,9 +196,9 @@
 											$att_val=$Periodc[2];
 									}
 									if($att_val=="Present")	
-										echo "<td class='w3-text-green' width='25%'>P</td>";
+										echo "<td class='w3-text-green'> P</td>";
 									else
-										echo "<td class='w3-text-red'  width='25%'>A</td>";
+										echo "<td class='w3-text-red' >A</td>";
 								}
 
 								?>

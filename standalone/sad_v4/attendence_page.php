@@ -50,7 +50,8 @@
 				          class_type:$class_type
 				        },
 				        function(data,status){
-				            alert("Data: " + data + "\nStatus: " + status);
+				        	alert("Data: " + data + "\nStatus: " + status);
+				            console.log("Data: " + data + "\nStatus: " + status);
 			        });
 				};
 			var $course_id=<?php echo $course_id?> ;
@@ -135,9 +136,9 @@
 					var $div=$(this).closest("li");
 					check_checkbox($div);
 					resp($(this).closest("li"));
-
-					
 				});
+
+				
 			});
 		</script>
 		<script type="text/javascript">
@@ -191,8 +192,37 @@
 				    alert(link);
 				    window.location=link;
 				});
+				$(document).on("click","#create_pdf",function(){
+						window.location="genpdf.php?course_id="+course_id+"&course_name="+course_name+"&course_year="+course_year+"&sem="+sem;
+					});
 			});
 		</script>
+		<!--floating bar-->
+		<style>
+			
+
+			.icon-bar {
+			    width: 90px;
+			    background-color: #555;
+			}
+
+			.icon-bar a {
+			    display: block;
+			    text-align: center;
+			    padding: 16px;
+			    transition: all 0.3s ease;
+			    color: white;
+			    font-size: 36px;
+			}
+
+			.icon-bar a:hover {
+			    background-color: #000;
+			}
+
+			.active {
+			    background-color: #4CAF50 !important;
+			}
+			</style>
 			
 		<link rel="stylesheet" href="pg_frame.css">
 	</head>
@@ -205,10 +235,12 @@
 			include 'nav_bar.php';
 		?>
 	    <!--Nav bar end-->
-	    	    <!--main page-->
+	    <!--main page container-->
 	    <div id="main-content" class="w3-container  " style="max-width:800px;top:80px;position:relative;">    
 			<div class="w3-panel  w3-theme-d2 w3-card-4" style="z-index: +1; position:relative;background-color: white;">
 				<div id="table_link" class="w3-right w3-button w3-hover-black" ><br/>Table</div>
+				<div id="create_pdf" class="w3-right w3-button w3-hover-black" ><br/>Create PDF</div>
+				
 				<h3>Class :
 				<?php echo $course_id ." ".$course_name ." ". $course_year ." sem: ".$sem;	?>	
 				</h3>
@@ -233,7 +265,7 @@
 			</div>	
 
 			<div class="w3-card-4 w3-padding w3-border" style="z-index: +1; position:relative;background-color: white;"">
-				<a>Student List</a>
+				<a >Student List</a>
 				
 				<ul class="w3-ul ">
 				<li class='w3-padding-16'>
@@ -251,6 +283,9 @@
 			</div>
 
 		</div>
+		
+
+
 
 			
 		<br/>
