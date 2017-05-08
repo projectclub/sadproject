@@ -20,12 +20,12 @@
 	    <link rel="stylesheet" href="../w3/w3css/4/w3.css">
       <link rel="stylesheet" href="../css/w3-theme-blue-grey.css">
       <link rel='stylesheet' href='../css/opensan.css'>
-      <link rel='stylesheet' href='../css/font-awesome.min.css'>
+      <link rel='stylesheet' href='../font-awesome-4.7.0/css/font-awesome.min.css'>
+		<script src="../jquery/jquery-3.2.1.min.js"></script>
 	    <style>
 	    html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	    </style>		
 
-		<script src="../jquery/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" id="responsive" >
 			var resp = function (div){ ;}
 			function savestudent(div){
@@ -87,8 +87,7 @@
 					);
 					return 1;
 				};
-				function check_checkbox($div)
-				{
+				function check_checkbox($div){
 					var list =($div.find('span'));
 					for (var i=0;i<list.length;i++){
 						alert($(list[i]).attr('id')+$(list[i]).html())
@@ -272,7 +271,7 @@
 					<span>Sort By</span>
 					<span class="w3-button w3-bar-item" id="byid" onclick="reorderdiv('by_id')"> Id</span>
 					<span class="w3-button w3-bar-item" id="byalph"  onclick="reorderdiv('by_name')" >Name</span>
-					<span class="w3-button w3-bar-item" id="bycheck"  onclick="reorderdiv('by_check')" >Check</span>
+					<span class="w3-button w3-bar-item" id="bycheck"  onclick="reorderdiv('by_check')" >Presenty</span>
 					<span class="w3-button w3-bar-item" id="byper"  onclick="reorderdiv('by_per')" >Percent</span>
 				</li>
 				<li></li>

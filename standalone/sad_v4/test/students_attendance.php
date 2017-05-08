@@ -5,12 +5,7 @@
 		
 		//===================================
 		//=============sql connect===========
-		$conn = mysqli_connect("localhost","root","","ams");
-		if (mysqli_connect_errno())
-	  	{
-	  		echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	  		die();
-	  	}
+		include'connection.php';
 	  	//===========================================
 ?>
 <div class="w3-container  " style="max-width:800px;margin-top:80px; ">  

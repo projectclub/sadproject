@@ -16,7 +16,7 @@
       <link rel="stylesheet" href="../w3/w3css/4/w3.css">
       <link rel="stylesheet" href="../css/w3-theme-blue-grey.css">
       <link rel='stylesheet' href='../css/opensan.css'>
-      <link rel='stylesheet' href='../css/font-awesome.min.css'>
+      <link rel='stylesheet' href='../font-awesome-4.7.0/css/font-awesome.min.css'>
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     </style>
@@ -112,7 +112,7 @@
 										$total=count($value[2]);
 										$P_total=count_P($value[2]);
 										echo "<span>".$P_total."/".$total."</span><span>&nbsp&nbsp";
-										echo (($total>0)?($P_total*100/$total):0);
+										echo number_format((float)(($total>0)?($P_total*100/$total):0),2,'.','');
 										echo "%</span>";
 									?>
 								</th>

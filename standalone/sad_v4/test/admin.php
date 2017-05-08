@@ -6,7 +6,7 @@
 		}
 	$student_id=$_SESSION["usr_id"];
 */
-	include 'connection.php';
+	include '../connection.php';
 ?>		
 <!DOCTYPE HTML>
 <html lang="en">
@@ -14,10 +14,11 @@
 		<title>AMS</title>
     	<meta charset="UTF-8">
       	<meta name="viewport" content="width=device-width, initial-scale=1">
-      	<link rel="stylesheet" href="../w3/w3css/4/w3.css">
-      	<link rel="stylesheet" href="../css/w3-theme-blue-grey.css">
-      	<link rel='stylesheet' href='../css/opensan.css'>
-      	<link rel='stylesheet' href='../css/font-awesome.min.css'>
+      	<link rel="stylesheet" href="../../w3/w3css/4/w3.css">
+      	<link rel="stylesheet" href="../../css/w3-theme-blue-grey.css">
+      	<link rel='stylesheet' href='../../css/opensan.css'>
+      	<link rel='stylesheet' href='../../css/font-awesome.min.css'>
+		<link rel="stylesheet" href="../pg_frame.css">
       	<style>
         	html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       	</style>
@@ -55,7 +56,6 @@
 			#Oslo {background-color:orange;}
 		</style>
 
-		<link rel="stylesheet" href="pg_frame.css">
 	</head>
 
 	<body>
@@ -63,7 +63,7 @@
 			<!--Nav bar-->
 			<?php 
 				$account_type="student";
-				include 'nav_bar.php'; 
+				include '../nav_bar.php'; 
 			?>
 		    <!--Nav bar end-->
 		    <!--main page-->
@@ -125,7 +125,7 @@
 			<br/>
 
 			<!--Footer-->
-			<?php include 'footer.php';?>
+			<?php include '../footer.php';?>
 		</div>
 	</body>
 </html>
